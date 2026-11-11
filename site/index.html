@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Example project: a short line that says what the project is</title>
+<meta name="description" content="A short line that says what the project is.">
+<link rel="icon" href="img/logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- The bar: the logo and the name, then the links. On a narrow screen, the button opens them (the script at the end). -->
+<header class="bar">
+  <a class="brand" href="#"><img src="img/logo.png" alt="" width="28" height="28"><span>example</span></a>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+  <nav id="nav">
+    <a href="#features">Features</a>
+    <a href="#download">Download</a>
+    <a href="changelog.html">Changelog</a>
+    <a href="https://github.com/sachahjkl/modern-site-template">GitHub</a>
+  </nav>
+</header>
+
+<main>
+  <!-- The hero: the logo, the name and one short line. Details go lower, in the cards. -->
+  <section class="hero">
+    <img class="mark" src="img/logo.png" alt="Example project logo" width="112" height="112">
+    <h1>example</h1>
+    <p class="lead">A short line that says what the project is.</p>
+    <div class="actions">
+      <!-- download -->
+      <a class="btn" href="https://github.com/sachahjkl/modern-site-template">Source on GitHub</a>
+    </div>
+    <p class="small"><!-- download-others --> &nbsp;·&nbsp; Nix: <code>nix profile add github:owner/example</code> &nbsp;·&nbsp; MIT</p>
+  </section>
+
+  <!-- The main picture: a click opens it large (gallery.js). -->
+  <figure class="shot wide">
+    <a class="frame" href="img/main.png"><img src="img/main.png" alt="The program's main window" loading="lazy"></a>
+    <figcaption>One sentence about what the picture shows.</figcaption>
+  </figure>
+
+  <!-- The features: one card each, a title and two or three lines. -->
+  <section id="features" class="grid">
+    <article class="card">
+      <h3>A first feature</h3>
+      <p>What it does for the reader, in two lines. Name the keys and the commands: <code>example run</code>.</p>
+    </article>
+    <article class="card">
+      <h3>A second feature</h3>
+      <p>A measured fact is better than an adjective: it starts in 30 ms, at 0 % CPU when it waits.</p>
+    </article>
+    <article class="card">
+      <h3>A third feature</h3>
+      <p>Each card says one thing. Six cards fill two rows on a wide screen.</p>
+    </article>
+    <article class="card">
+      <h3>A fourth feature</h3>
+      <p>The grid goes to two columns, then one, as the screen narrows.</p>
+    </article>
+    <article class="card">
+      <h3>A fifth feature</h3>
+      <p>Code reads as code: <code>example --help</code>.</p>
+    </article>
+    <article class="card">
+      <h3>A sixth feature</h3>
+      <p>The last card can say how to set it: <code>example set key value</code>.</p>
+    </article>
+  </section>
+
+  <!-- whats-new -->
+
+  <!-- More pictures, smaller: each one opens large too. -->
+  <section class="gallery">
+    <figure class="shot"><a class="frame" href="img/second.png"><img src="img/second.png" alt="A second view of the program" loading="lazy"></a><figcaption>A second view</figcaption></figure>
+    <figure class="shot"><a class="frame" href="img/third.png"><img src="img/third.png" alt="A third view of the program" loading="lazy"></a><figcaption>A third view</figcaption></figure>
+    <figure class="shot"><a class="frame" href="img/fourth.png"><img src="img/fourth.png" alt="A fourth view of the program" loading="lazy"></a><figcaption>A fourth view</figcaption></figure>
+  </section>
+
+  <!-- The download: one well per way to get it. {{version}} is the last version of CHANGELOG.md. -->
+  <section id="download" class="download">
+    <h2>Download</h2>
+    <div class="cols">
+      <div class="well">
+        <h3>Linux</h3>
+        <p>One program for Linux x64. Unpack it and run <code>./example</code>.</p>
+        <code><a href="https://github.com/sachahjkl/modern-site-template/releases/download/v{{version}}/example-{{version}}-linux-x64.tar.gz">example-{{version}}-linux-x64.tar.gz</a></code>
+      </div>
+      <div class="well">
+        <h3>Windows</h3>
+        <p>One program for Windows 10 and 11 (x64). Unzip it and start <code>example.exe</code>.</p>
+        <code><a href="https://github.com/sachahjkl/modern-site-template/releases/download/v{{version}}/example-{{version}}-windows-x64.zip">example-{{version}}-windows-x64.zip</a></code>
+      </div>
+      <div class="well">
+        <h3>Nix</h3>
+        <p>The flake builds it from source: <code>nix run github:owner/example</code>.</p>
+        <code>nix profile add github:owner/example</code>
+      </div>
+    </div>
+    <p class="small">The <a href="https://github.com/sachahjkl/modern-site-template#readme">README</a> says the rest.</p>
+  </section>
+</main>
+
+<!-- The footer: who makes it, then one short line. "Classic version" must stay: the build links it to classic/. -->
+<footer>
+  <p class="by">By <span class="maker"><img src="img/froment-software-64.png" alt="" width="16" height="16"><a href="https://froment.software">Froment Software</a></span></p>
+  <p class="small"><span>MIT licence</span> · <span>Built in <a href="https://odin-lang.org">Odin</a> on <a href="https://gt.sacha.house/">gui_toolkit</a></span> · <a href="classic/">Classic version</a></p>
+</footer>
+<script>
+  // the bar's menu on narrow screens: the button opens it, a link or a click elsewhere closes it
+  const bar = document.querySelector('.bar'), burger = bar.querySelector('.burger');
+  const shut = () => { bar.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); };
+  burger.addEventListener('click', e => { e.stopPropagation(); burger.setAttribute('aria-expanded', String(bar.classList.toggle('open'))); });
+  bar.querySelectorAll('nav a').forEach(a => a.addEventListener('click', shut));
+  document.addEventListener('click', e => { if (!bar.contains(e.target)) shut(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') shut(); });
+</script>
+<script src="gallery.js" defer></script>
+</body>
+</html>

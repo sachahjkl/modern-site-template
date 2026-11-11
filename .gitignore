@@ -1,0 +1,4 @@
+build/
+_site/
+result
+.pre-commit-config.yaml

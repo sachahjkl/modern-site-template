@@ -1,0 +1,2 @@
+name=modern-site-template
+description=A template for a project website in the modern style: a home page, a searchable changelog and a classic version, built in Odin
