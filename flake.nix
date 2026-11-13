@@ -32,7 +32,7 @@
       installPhase = ''
         mkdir -p $out/lib/odin $out/bin
         cp -r . $out/lib/odin
-        makeWrapper $out/lib/odin/odin $out/bin/odin --set ODIN_ROOT $out/lib/odin/ --prefix PATH : ${pkgs.lib.makeBinPath [pkgs.clang pkgs.lld]}
+        makeWrapper $out/lib/odin/odin $out/bin/odin --set-default ODIN_ROOT $out/lib/odin/ --prefix PATH : ${pkgs.lib.makeBinPath [pkgs.clang pkgs.lld]}
       '';
     };
 
