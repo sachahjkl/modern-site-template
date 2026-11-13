@@ -44,7 +44,7 @@
       nativeBuildInputs = [odin];
       buildPhase = ''
         export HOME=$TMPDIR
-        odin run tools/sitetool -collection:gt=ext/gui_toolkit/src -out:$TMPDIR/sitetool -- build $out
+        odin run tools/sitetool -collection:gt=ext/gui_toolkit/src -out:$TMPDIR/sitetool -- site build site $out
       '';
       dontInstall = true;
     };

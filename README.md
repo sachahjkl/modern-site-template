@@ -11,7 +11,7 @@ the rest.
 
 ## What the build makes
 
-From `site/index.html` and `CHANGELOG.md`, `sitetool build` writes:
+From `site/index.html` and `CHANGELOG.md`, `sitetool site build` writes:
 
 - **the home page**, with:
   - a download button for the reader's system (Windows, Linux or macOS), the other systems on the line under it;
@@ -28,7 +28,8 @@ From `site/index.html` and `CHANGELOG.md`, `sitetool build` writes:
 
 The steps are [gui_toolkit](https://github.com/sachahjkl/gui_toolkit)'s `site` package
 ([its documentation](https://github.com/sachahjkl/gui_toolkit/blob/master/docs/site.md)), in the submodule `ext/gui_toolkit`.
-`tools/sitetool` is a small Odin program that calls them.
+`tools/sitetool` is a small Odin program that calls them: its commands are the toolkit's `site` and `changelog` commands
+(`gt:toolbox`'s `tool_main`).
 
 ## Using the template
 
@@ -50,22 +51,27 @@ The steps are [gui_toolkit](https://github.com/sachahjkl/gui_toolkit)'s `site` p
 Everything in `site/`, `CHANGELOG.md` and `tools/sitetool/site.odin` is example content about a fictional "Example
 project": replace it.
 
-In a program's own repository, put `site/` and the two files of `tools/sitetool` in it, and make `build` and `check` commands of
-its tool (papier's `tools/papiertool/site.odin` is one).
+In a program's own repository, put `site/` in it and add `site.command` to its tool, with the content of
+`tools/sitetool/site.odin` (papier's `tools/papiertool` is one).
 
 ## Building it on your machine
 
 `nix develop` gives Odin and the commit hooks. Then:
 
 ```sh
-odin run tools/sitetool -collection:gt=ext/gui_toolkit/src -out:build/sitetool -- build build/site
+./build.sh site build site build/site
 ```
+
+(`build.sh` and `build.bat` run `odin run tools/sitetool -collection:gt=ext/gui_toolkit/src -out:build/sitetool -- <command>`;
+`./build.sh help` lists the commands.)
 
 `build/site` is the site; serve the folder with any static server to see it. Other commands:
 
-- `sitetool check [--shot file.png]`: the pages in a real browser (Chrome, Chromium or Edge), served on this machine: a
+- `sitetool site check [--shot file.png]`: the pages in a real browser (Chrome, Chromium or Edge), served on this machine: a
   missing image, a broken link or a script error fails it;
-- `sitetool card`: draws the picture a shared link shows again, in a local browser.
+- `sitetool site card`: draws the picture a shared link shows again, in a local browser;
+- `sitetool changelog new <type> <text>`, `check`, `preview`: the fragments of `changelog.d/`, one per change a user can see
+  (`changelog.d/README.md`).
 
 `nix build` makes the same site in `result/`, and `nix flake check` builds it and runs the hooks.
 
